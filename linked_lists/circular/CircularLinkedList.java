@@ -5,29 +5,29 @@ public class CircularLinkedList {
 
     // Constructor
     public CircularLinkedList() {
-        this.head = null;
+        this.head = null; // set the head to null
     }
 
     // Method to insert a new node at the beginning of the list
     public void insertAtBeginning(int data) {
-        CircularNode newNode = new CircularNode(data);
-        if (head == null) {
-            head = newNode;
-            newNode.next = head;
+        CircularNode newNode = new CircularNode(data); // create a new node
+        if (head == null) { // if the list is empty
+            head = newNode; // set the new node as the head
+            newNode.next = head; // set the next pointer of the new node to itself
         } else {
-            CircularNode temp = head;
-            while (temp.next != head) {
-                temp = temp.next;
+            CircularNode temp = head; // store the head in a temporary variable
+            while (temp.next != head) { // traverse the list to find the last node
+                temp = temp.next; // move to the next node
             }
-            temp.next = newNode;
-            newNode.next = head;
-            head = newNode;
+            temp.next = newNode; // set the next pointer of the last node to the new node
+            newNode.next = head; // set the next pointer of the new node to the head
+            head = newNode; // set the new node as the head
         }
     }
 
     // Method to insert a new node at the end of the list
     public void insertAtEnd(int data) {
-        CircularNode newNode = new CircularNode(data);
+        CircularNode newNode = new CircularNode(data); 
         if (head == null) {
             head = newNode;
             newNode.next = head;
@@ -96,6 +96,21 @@ public class CircularLinkedList {
             temp = temp.next;
         } while (temp != head);
         System.out.println();
+    }
+
+    // Method to reverse the circular linked list
+    public void reverse() {
+        CircularNode prev = null;
+        CircularNode current = head;
+        CircularNode next = null;
+        do {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        } while (current != head);
+        head.next = prev;
+        head = prev;
     }
     public static void main(String[] args) {
         CircularLinkedList list = new CircularLinkedList();
